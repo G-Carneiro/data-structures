@@ -197,4 +197,3 @@ class DoublyCircularList:
         nodes[-1].set_next(self._head)
 
         return None
-

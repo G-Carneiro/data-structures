@@ -54,6 +54,8 @@ class DoublyCircularList:
     def insert(self, data: T, index: Optional[int] = None) -> None:
         if ((index is None) or (index > self._size)):
             index = self._size
+        elif (index < 0):
+            index = 0
 
         if (index == self._size):
             self.push_back(data=data)
@@ -128,6 +130,8 @@ class DoublyCircularList:
     def pop(self, index: Optional[int] = None) -> Optional[Node]:
         if ((index is None) or (index > self._size - 1)):
             index = self._size - 1
+        elif (index < 0):
+            index = 0
 
         if (index == self._size - 1):
             return self.pop_back()
@@ -166,3 +170,7 @@ class DoublyCircularList:
 
         return False
 
+    def clear(self) -> None:
+        self._head = None
+        self._size = 0
+        return None

@@ -23,7 +23,13 @@ class DoublyCircularList:
     def push_back(self, data: T) -> None:
         if self.empty():
             self._head = Node(data)
-        else:
+        elif (self._size == 1):
+            new_node: Node = Node(data)
+            new_node.set_previous(self._head)
+            new_node.set_next(self._head)
+            self._head.set_previous(new_node)
+            self._head.set_next(new_node)
+        else:   # FIXME
             new_node: Node = Node(data)
             tail: Optional[Node] = self._head.previous()
             new_node.set_previous(tail)

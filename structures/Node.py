@@ -20,20 +20,28 @@ class LinkedListNode(Node):
     def next(self) -> Optional[LinkedListNode]:
         return self._next
 
-    def set_next(self, node: LinkedListNode) -> None:
+    def set_next(self, node: Optional[LinkedListNode] = None) -> None:
         self._next = node
         return None
 
 
-class DoublyLinkedListNode(LinkedListNode):
+class DoublyLinkedListNode(Node):
     def __init__(self, data: T) -> None:
         super().__init__(data)
+        self._next: Optional[DoublyLinkedListNode] = None
         self._previous: Optional[DoublyLinkedListNode] = None
+
+    def next(self) -> Optional[DoublyLinkedListNode]:
+        return self._next
+
+    def set_next(self, node: Optional[DoublyLinkedListNode] = None) -> None:
+        self._next = node
+        return None
 
     def previous(self) -> Optional[DoublyLinkedListNode]:
         return self._previous
 
-    def set_previous(self, node: DoublyLinkedListNode) -> None:
+    def set_previous(self, node: Optional[DoublyLinkedListNode] = None) -> None:
         self._previous = node
         return None
 
@@ -47,13 +55,13 @@ class BinaryTreeNode(Node):
     def left(self) -> Optional[BinaryTreeNode]:
         return self._left
 
-    def set_left(self, node: BinaryTreeNode) -> None:
+    def set_left(self, node: Optional[BinaryTreeNode] = None) -> None:
         self._left = node
         return None
 
     def right(self) -> Optional[BinaryTreeNode]:
         return self._right
 
-    def set_right(self, node: BinaryTreeNode) -> None:
+    def set_right(self, node: Optional[BinaryTreeNode] = None) -> None:
         self._right = node
         return None

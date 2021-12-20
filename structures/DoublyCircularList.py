@@ -81,3 +81,68 @@ class DoublyCircularList:
             self.push_back(value)
 
         return None
+
+    def pop_back(self) -> Optional[Node]:
+        if (self.empty()):
+            return None
+
+        tail: Node = self._head.previous()
+        if (self._size == 1):
+            tail = self._head
+            self._head = None
+        elif (self._size == 2):
+            self._head.set_previous(None)
+            self._head.set_next(None)
+        else:
+            new_tail: Node = tail.previous()
+            new_tail.set_next(self._head)
+            self._head.set_previous(new_tail)
+
+        self._size -= 1
+
+        return tail
+
+    def pop_front(self) -> Optional[Node]:
+        if (self.empty()):
+            return None
+
+        head: Node = self._head
+        if (self._size == 1):
+            self._head = None
+        elif (self._size == 2):
+            new_head: Node = self._head.previous()
+            new_head.set_previous(None)
+            new_head.set_next(None)
+            self._head = new_head
+        else:
+            new_head: Node = self._head.next()
+            tail: Node = self._head.previous()
+            new_head.set_previous(tail)
+            tail.set_next(new_head)
+            self._head = new_head
+
+        self._size -= 1
+
+        return head
+
+    def pop(self, index: Optional[int] = None) -> Optional[Node]:
+        if ((index is None) or (index > self._size - 1)):
+            index = self._size - 1
+
+        if (index == self._size - 1):
+            return self.pop_back()
+        elif (index == 0):
+            return self.pop_front()
+        else:
+            removed_node: Node = self._head
+            for _ in range(index):
+                removed_node = removed_node.next()
+
+            previous_node: Node = removed_node.previous()
+            next_node: Node = removed_node.next()
+            previous_node.set_next(next_node)
+            next_node.set_previous(previous_node)
+
+            self._size -= 1
+
+            return removed_node

@@ -146,3 +146,23 @@ class DoublyCircularList:
             self._size -= 1
 
             return removed_node
+
+    def find(self, data: T) -> Optional[int]:
+        index: int = 0
+        actual_node: Node = self._head
+        while (index < self._size):
+            if (actual_node.data() == data):
+                return index
+
+            actual_node = actual_node.next()
+            index += 1
+
+        return None
+
+    def contains(self, data: T) -> bool:
+        index: Optional[int] = self.find(data)
+        if (index is not None):
+            return True
+
+        return False
+

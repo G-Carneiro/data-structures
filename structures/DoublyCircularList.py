@@ -29,17 +29,61 @@ class DoublyCircularList:
             new_node.set_next(self._head)
             self._head.set_previous(new_node)
             self._head.set_next(new_node)
-        else:   # FIXME
+        else:
             new_node: Node = Node(data)
-            tail: Optional[Node] = self._head.previous()
+            tail: Node = self._head.previous()
             new_node.set_previous(tail)
             new_node.set_next(self._head)
-            if tail:
-                tail.set_next(new_node)
-
+            tail.set_next(new_node)
             self._head.set_previous(new_node)
 
         self._size += 1
+
+        return None
+
+    def push_front(self, data: T) -> None:
+        if self.empty():
+            self._head = Node(data)
+        elif (self._size == 1):
+            new_node: Node = Node(data)
+            new_node.set_previous(self._head)
+            new_node.set_next(self._head)
+            self._head.set_previous(new_node)
+            self._head.set_next(new_node)
+            self._head = new_node
+        else:
+            new_node: Node = Node(data)
+            tail: Node = self._head.previous()
+            new_node.set_previous(tail)
+            new_node.set_next(self._head)
+            tail.set_next(new_node)
+            self._head.set_previous(new_node)
+            self._head = new_node
+
+        self._size += 1
+
+        return None
+
+    def insert(self, data: T, index: Optional[int] = None) -> None:
+        if ((index is None) or (index > self._size)):
+            index = self._size
+
+        if (index == self._size):
+            self.push_back(data=data)
+        elif (index == 0):
+            self.push_front(data=data)
+        else:
+            actual_node: Node = self._head
+            new_node = Node(data)
+
+            for _ in range(index):
+                actual_node = actual_node.next()
+
+            previous_node: Node = actual_node.previous()
+            new_node.set_previous(previous_node)
+            new_node.set_next(actual_node)
+            previous_node.set_next(new_node)
+            actual_node.set_previous(new_node)
 
         return None
 

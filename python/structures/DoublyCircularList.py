@@ -1,8 +1,7 @@
 from typing import List, Optional
 from random import shuffle
 
-from generic_type import T
-from Node import DoublyLinkedListNode as Node
+from .Node import DoublyLinkedListNode as Node, T
 
 
 class DoublyCircularList:
@@ -85,7 +84,7 @@ class DoublyCircularList:
 
         return None
 
-    def pop_back(self) -> Optional[Node]:
+    def pop_back(self) -> Optional[T]:
         if (self.empty()):
             return None
 
@@ -103,9 +102,9 @@ class DoublyCircularList:
 
         self._size -= 1
 
-        return tail
+        return (tail.data())
 
-    def pop_front(self) -> Optional[Node]:
+    def pop_front(self) -> Optional[T]:
         if (self.empty()):
             return None
 
@@ -126,9 +125,9 @@ class DoublyCircularList:
 
         self._size -= 1
 
-        return head
+        return (head.data())
 
-    def pop(self, index: Optional[int] = None) -> Optional[Node]:
+    def pop(self, index: Optional[int] = None) -> Optional[T]:
         if ((index is None) or (index > self._size - 1)):
             index = self._size - 1
         elif (index < 0):
@@ -150,7 +149,14 @@ class DoublyCircularList:
 
             self._size -= 1
 
-            return removed_node
+            return (removed_node.data())
+
+    def remove(self, data: T) -> None:
+        index: int = self.find(data)
+        if (index is not None):
+            self.pop(index)
+
+        return None
 
     def find(self, data: T) -> Optional[int]:
         index: int = 0
@@ -177,7 +183,7 @@ class DoublyCircularList:
         return None
 
     def shuffle(self) -> None:
-        if (self.empty()):
+        if (self._size < 3):
             return None
 
         nodes: List[Node] = [self._head]

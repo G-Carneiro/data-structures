@@ -1,7 +1,7 @@
 from __future__ import annotations
 from typing import Optional
 
-from generic_type import T
+T = int
 
 
 class Node:

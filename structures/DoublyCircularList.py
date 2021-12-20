@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from generic_type import T
-from Node import Node
+from Node import DoublyLinkedListNode as Node
 
 
 class DoublyCircularList:
@@ -44,23 +44,10 @@ class DoublyCircularList:
     def push_front(self, data: T) -> None:
         if self.empty():
             self._head = Node(data)
-        elif (self._size == 1):
-            new_node: Node = Node(data)
-            new_node.set_previous(self._head)
-            new_node.set_next(self._head)
-            self._head.set_previous(new_node)
-            self._head.set_next(new_node)
-            self._head = new_node
+            self._size += 1
         else:
-            new_node: Node = Node(data)
-            tail: Node = self._head.previous()
-            new_node.set_previous(tail)
-            new_node.set_next(self._head)
-            tail.set_next(new_node)
-            self._head.set_previous(new_node)
-            self._head = new_node
-
-        self._size += 1
+            self.push_back(data)
+            self._head = self._head.previous()
 
         return None
 
@@ -84,6 +71,8 @@ class DoublyCircularList:
             new_node.set_next(actual_node)
             previous_node.set_next(new_node)
             actual_node.set_previous(new_node)
+
+            self._size += 1
 
         return None
 

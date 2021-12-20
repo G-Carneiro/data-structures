@@ -1,4 +1,5 @@
 from typing import List, Optional
+from random import shuffle
 
 from generic_type import T
 from Node import DoublyLinkedListNode as Node
@@ -174,3 +175,26 @@ class DoublyCircularList:
         self._head = None
         self._size = 0
         return None
+
+    def shuffle(self) -> None:
+        if (self.empty()):
+            return None
+
+        nodes: List[Node] = [self._head]
+        actual_node: Node = self._head
+        tail: Node = self._head.previous()
+        while (actual_node != tail):
+            actual_node = actual_node.next()
+            nodes.append(actual_node)
+
+        shuffle(nodes)
+        for i in range(self._size - 1):
+            nodes[i].set_previous(nodes[i - 1])
+            nodes[i].set_next(nodes[i + 1])
+
+        self._head = nodes[0]
+        nodes[-1].set_previous(nodes[-2])
+        nodes[-1].set_next(self._head)
+
+        return None
+

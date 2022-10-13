@@ -17,47 +17,47 @@ class DoublyCircularListTest(unittest.TestCase):
 
     def test_push_back(self) -> None:
         self._doubly.push_back(0)
-        self.assertEqual(1, self._doubly.size())
+        self.assertEqual(1, self._doubly.size)
         self._doubly.push_back(1)
-        self.assertEqual(2, self._doubly.size())
+        self.assertEqual(2, self._doubly.size)
 
-        head: Node = self._doubly.head()
-        tail: Node = head.previous()
+        head: Node = self._doubly.head
+        tail: Node = head.previous
 
-        self.assertEqual(0, head.data())
-        self.assertEqual(1, tail.data())
-        self.assertEqual(head, tail.next())
-        self.assertEqual(head, tail.previous())
-        self.assertEqual(tail, head.next())
-        self.assertEqual(tail, head.previous())
+        self.assertEqual(0, head.data)
+        self.assertEqual(1, tail.data)
+        self.assertEqual(head, tail.next)
+        self.assertEqual(head, tail.previous)
+        self.assertEqual(tail, head.next)
+        self.assertEqual(tail, head.previous)
 
         self._doubly.push_back(2)
-        self.assertEqual(3, self._doubly.size())
+        self.assertEqual(3, self._doubly.size)
 
-        tail = head.previous()
-        second: Node = head.next()
+        tail = head.previous
+        second: Node = head.next
 
-        self.assertEqual(0, head.data())
-        self.assertEqual(2, tail.data())
-        self.assertEqual(head, tail.next())
-        self.assertEqual(second, tail.previous())
-        self.assertEqual(second, head.next())
-        self.assertEqual(tail, head.previous())
-        self.assertEqual(head, second.previous())
-        self.assertEqual(tail, second.next())
+        self.assertEqual(0, head.data)
+        self.assertEqual(2, tail.data)
+        self.assertEqual(head, tail.next)
+        self.assertEqual(second, tail.previous)
+        self.assertEqual(second, head.next)
+        self.assertEqual(tail, head.previous)
+        self.assertEqual(head, second.previous)
+        self.assertEqual(tail, second.next)
 
         for i in range(3, 10):
             self._doubly.push_back(i)
-            tail = head.previous()
-            self.assertEqual(i, tail.data())
+            tail = head.previous
+            self.assertEqual(i, tail.data)
 
-            self.assertEqual(head, tail.next())
-            self.assertEqual(second, head.next())
-            self.assertEqual(tail, head.previous())
-            self.assertEqual(head, second.previous())
-            self.assertEqual(i - 1, tail.previous().data())
+            self.assertEqual(head, tail.next)
+            self.assertEqual(second, head.next)
+            self.assertEqual(tail, head.previous)
+            self.assertEqual(head, second.previous)
+            self.assertEqual(i - 1, tail.previous.data)
 
-        self.assertEqual(10, self._doubly.size())
+        self.assertEqual(10, self._doubly.size)
 
         return None
 
@@ -72,6 +72,13 @@ class DoublyCircularListTest(unittest.TestCase):
 
         self.assertIsNone(self._doubly.find(-1))
         self.assertIsNone(self._doubly.find(10))
+
+        return None
+
+    def test_insert_values(self) -> None:
+        doubly = DoublyCircularList(list(range(10)))
+        for i in range(10):
+            self.assertEqual(i, doubly.find(i))
 
         return None
 
@@ -95,18 +102,19 @@ class DoublyCircularListTest(unittest.TestCase):
 
         self._doubly.clear()
 
-        self.assertIsNone(self._doubly.head())
-        self.assertEqual(0, self._doubly.size())
+        self.assertIsNone(self._doubly.head)
+        self.assertEqual(0, self._doubly.size)
 
         return None
 
     def test_shuffle(self) -> None:
+        self.assertIsNone(self._doubly.shuffle())
         for i in range(1000):
             self._doubly.push_back(i)
 
         self._doubly.shuffle()
 
-        self.assertEqual(1000, self._doubly.size())
+        self.assertEqual(1000, self._doubly.size)
 
         for i in range(1000):
             self.assertTrue(self._doubly.contains(i))
@@ -114,12 +122,16 @@ class DoublyCircularListTest(unittest.TestCase):
         return None
 
     def test_insert(self) -> None:
-        for i in range(5):
+        for i in range(2, 5):
             self._doubly.push_back(i)
 
-        for i in range(6, 10):
+        for i in range(6, 8):
             self._doubly.push_back(i)
 
+        self._doubly.insert(data=8)
+        self._doubly.insert(data=9, index=999)
+        self._doubly.insert(data=1, index=0)
+        self._doubly.insert(data=0, index=-1)
         self._doubly.insert(5, 5)
 
         for i in range(10):
@@ -129,48 +141,48 @@ class DoublyCircularListTest(unittest.TestCase):
 
     def test_push_front(self) -> None:
         self._doubly.push_front(0)
-        self.assertEqual(1, self._doubly.size())
+        self.assertEqual(1, self._doubly.size)
         self._doubly.push_front(1)
-        self.assertEqual(2, self._doubly.size())
+        self.assertEqual(2, self._doubly.size)
 
-        head: Node = self._doubly.head()
-        tail: Node = head.previous()
+        head: Node = self._doubly.head
+        tail: Node = head.previous
 
-        self.assertEqual(1, head.data())
-        self.assertEqual(0, tail.data())
-        self.assertEqual(head, tail.next())
-        self.assertEqual(head, tail.previous())
-        self.assertEqual(tail, head.next())
-        self.assertEqual(tail, head.previous())
+        self.assertEqual(1, head.data)
+        self.assertEqual(0, tail.data)
+        self.assertEqual(head, tail.next)
+        self.assertEqual(head, tail.previous)
+        self.assertEqual(tail, head.next)
+        self.assertEqual(tail, head.previous)
 
         self._doubly.push_front(2)
-        self.assertEqual(3, self._doubly.size())
+        self.assertEqual(3, self._doubly.size)
 
-        head = self._doubly.head()
-        second: Node = self._doubly.head().next()
+        head = self._doubly.head
+        second: Node = self._doubly.head.next
 
-        self.assertEqual(2, head.data())
-        self.assertEqual(0, tail.data())
-        self.assertEqual(head, tail.next())
-        self.assertEqual(second, tail.previous())
-        self.assertEqual(second, head.next())
-        self.assertEqual(tail, head.previous())
-        self.assertEqual(head, second.previous())
-        self.assertEqual(tail, second.next())
+        self.assertEqual(2, head.data)
+        self.assertEqual(0, tail.data)
+        self.assertEqual(head, tail.next)
+        self.assertEqual(second, tail.previous)
+        self.assertEqual(second, head.next)
+        self.assertEqual(tail, head.previous)
+        self.assertEqual(head, second.previous)
+        self.assertEqual(tail, second.next)
 
         for i in range(3, 10):
             self._doubly.push_front(i)
-            head = self._doubly.head()
-            second = head.next()
-            self.assertEqual(i, head.data())
+            head = self._doubly.head
+            second = head.next
+            self.assertEqual(i, head.data)
 
-            self.assertEqual(head, tail.next())
-            self.assertEqual(second, head.next())
-            self.assertEqual(tail, head.previous())
-            self.assertEqual(head, second.previous())
-            self.assertEqual(i - 1, head.next().data())
+            self.assertEqual(head, tail.next)
+            self.assertEqual(second, head.next)
+            self.assertEqual(tail, head.previous)
+            self.assertEqual(head, second.previous)
+            self.assertEqual(i - 1, head.next.data)
 
-        self.assertEqual(10, self._doubly.size())
+        self.assertEqual(10, self._doubly.size)
 
         return None
 
@@ -184,6 +196,7 @@ class DoublyCircularListTest(unittest.TestCase):
             self.assertFalse(self._doubly.contains(i))
 
         self.assertTrue(self._doubly.empty())
+        self.assertIsNone(self._doubly.pop_back())
 
         return None
 
@@ -205,8 +218,14 @@ class DoublyCircularListTest(unittest.TestCase):
             self._doubly.push_back(i)
 
         self.assertEqual(5, self._doubly.pop(5))
+        self.assertFalse(self._doubly.find(5))
         self.assertEqual(6, self._doubly.pop(5))
-        self.assertEqual(8, self._doubly.size())
+        self.assertEqual(8, self._doubly.size)
+        self.assertEqual(9, self._doubly.pop())
+        self.assertEqual(8, self._doubly.pop(index=999))
+        self.assertEqual(0, self._doubly.pop(0))
+        self.assertEqual(1, self._doubly.pop(-1))
+        self.assertEqual(4, self._doubly.size)
 
         return None
 
@@ -215,7 +234,7 @@ class DoublyCircularListTest(unittest.TestCase):
             self._doubly.push_back(i)
 
         self._doubly.remove(4)
-        self.assertEqual(9, self._doubly.size())
+        self.assertEqual(9, self._doubly.size)
         self.assertFalse(self._doubly.contains(4))
 
         return None

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Optional
 
 T = int
@@ -8,6 +9,7 @@ class Node:
     def __init__(self, data: T) -> None:
         self._data: T = data
 
+    @property
     def data(self) -> T:
         return self._data
 
@@ -17,12 +19,13 @@ class LinkedListNode(Node):
         super().__init__(data)
         self._next: Optional[LinkedListNode] = None
 
+    @property
     def next(self) -> Optional[LinkedListNode]:
         return self._next
 
-    def set_next(self, node: Optional[LinkedListNode] = None) -> None:
+    @next.setter
+    def next(self, node: LinkedListNode = None):
         self._next = node
-        return None
 
 
 class DoublyLinkedListNode(Node):
@@ -31,19 +34,21 @@ class DoublyLinkedListNode(Node):
         self._next: Optional[DoublyLinkedListNode] = None
         self._previous: Optional[DoublyLinkedListNode] = None
 
+    @property
     def next(self) -> Optional[DoublyLinkedListNode]:
         return self._next
 
-    def set_next(self, node: Optional[DoublyLinkedListNode] = None) -> None:
+    @next.setter
+    def next(self, node: DoublyLinkedListNode = None):
         self._next = node
-        return None
 
+    @property
     def previous(self) -> Optional[DoublyLinkedListNode]:
         return self._previous
 
-    def set_previous(self, node: Optional[DoublyLinkedListNode] = None) -> None:
+    @previous.setter
+    def previous(self, node: DoublyLinkedListNode = None):
         self._previous = node
-        return None
 
 
 class BinaryTreeNode(Node):
@@ -52,16 +57,18 @@ class BinaryTreeNode(Node):
         self._left: Optional[BinaryTreeNode] = None
         self._right: Optional[BinaryTreeNode] = None
 
+    @property
     def left(self) -> Optional[BinaryTreeNode]:
         return self._left
 
-    def set_left(self, node: Optional[BinaryTreeNode] = None) -> None:
+    @left.setter
+    def left(self, node: BinaryTreeNode = None):
         self._left = node
-        return None
 
+    @property
     def right(self) -> Optional[BinaryTreeNode]:
         return self._right
 
-    def set_right(self, node: Optional[BinaryTreeNode] = None) -> None:
+    @right.setter
+    def right(self, node: BinaryTreeNode = None) -> None:
         self._right = node
-        return None

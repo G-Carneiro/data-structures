@@ -1,7 +1,7 @@
 import unittest
 
 from ..structures.DoublyCircularList import DoublyCircularList
-from ..structures.Node import DoublyLinkedListNode as Node
+from ..structures.Node import DoublyLinkedNode as Node
 
 
 class DoublyCircularListTest(unittest.TestCase):

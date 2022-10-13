@@ -14,40 +14,40 @@ class Node:
         return self._data
 
 
-class LinkedListNode(Node):
+class LinkedNode(Node):
     def __init__(self, data: T) -> None:
         super().__init__(data)
-        self._next: Optional[LinkedListNode] = None
+        self._next: Optional[LinkedNode] = None
 
     @property
-    def next(self) -> Optional[LinkedListNode]:
+    def next(self) -> Optional[LinkedNode]:
         return self._next
 
     @next.setter
-    def next(self, node: LinkedListNode = None):
+    def next(self, node: LinkedNode = None):
         self._next = node
 
 
-class DoublyLinkedListNode(Node):
+class DoublyLinkedNode(Node):
     def __init__(self, data: T) -> None:
         super().__init__(data)
-        self._next: Optional[DoublyLinkedListNode] = None
-        self._previous: Optional[DoublyLinkedListNode] = None
+        self._next: Optional[DoublyLinkedNode] = None
+        self._previous: Optional[DoublyLinkedNode] = None
 
     @property
-    def next(self) -> Optional[DoublyLinkedListNode]:
+    def next(self) -> Optional[DoublyLinkedNode]:
         return self._next
 
     @next.setter
-    def next(self, node: DoublyLinkedListNode = None):
+    def next(self, node: DoublyLinkedNode = None):
         self._next = node
 
     @property
-    def previous(self) -> Optional[DoublyLinkedListNode]:
+    def previous(self) -> Optional[DoublyLinkedNode]:
         return self._previous
 
     @previous.setter
-    def previous(self, node: DoublyLinkedListNode = None):
+    def previous(self, node: DoublyLinkedNode = None):
         self._previous = node
 
 

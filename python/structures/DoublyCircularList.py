@@ -1,7 +1,7 @@
 from random import shuffle
 from typing import List, Optional
 
-from .Node import DoublyLinkedListNode as Node, T
+from .Node import DoublyLinkedNode as Node, T
 
 
 class DoublyCircularList:

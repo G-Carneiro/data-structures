@@ -60,6 +60,7 @@ class LinkedList(LinkedBase):
         return self[index].data
 
     def pop(self, index: int) -> T:
+        # TODO: use super() or create new based method?
         previous: LN = self._before_index(index=index)
         head: LN = self.head
         removed: LN = previous.next
@@ -76,18 +77,21 @@ class LinkedList(LinkedBase):
         return super()._pop_front()
 
     def remove(self, data: T) -> None:
-        pass
+        self.pop(index=self.find(data=data))
+        return None
 
     def contains(self, data: T) -> bool:
-        return (self.find(data=data) is not None)
+        try:
+            self.find(data=data)
+        except ValueError:
+            return False
+
+        return True
 
     def find(self, data: T) -> int:
-        actual_node: LN = self._head
-        for i in range(self.size):
-            if (actual_node.data == data):
+        for i, node in enumerate(self):
+            if (node.data == data):
                 return i
-
-            actual_node = actual_node.next
 
         raise ValueError
 

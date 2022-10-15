@@ -112,13 +112,9 @@ class LinkedList(LinkedBase):
         return None
 
     @overload
-    def append(self, node: LN) -> None:
-        self[-1].next = node
-        return None
-
-    @overload
     def append(self, linked_list: LinkedList) -> None:
-        self.append(node=linked_list.head)
+        self[-1].next = linked_list.head
+        self._size += linked_list.size
         return None
 
     def append(self, data: T | LN | LinkedList) -> None:

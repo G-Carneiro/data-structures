@@ -40,7 +40,9 @@ class LinkedBase:
         return removed.data
 
     def clear(self) -> None:
-        pass
+        while (not self.empty()):
+            self._pop_front()
+        return None
 
     def __len__(self) -> int:
         return self.size

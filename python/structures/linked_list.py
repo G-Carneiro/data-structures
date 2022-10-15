@@ -43,7 +43,18 @@ class LinkedList(LinkedBase):
         ...
 
     def insert_sorted(self, data: T) -> None:
-        pass
+        previous: LN = self.head
+        key = self.size
+        for key, node in enumerate(self):
+            if (node.data > data):
+                break
+            previous = node
+
+        if (key == 0):
+            self.push_front(data=data)
+        else:
+            self.insert(data=data, previous=previous)
+        return None
 
     def at(self, index: int) -> T:
         return self[index].data

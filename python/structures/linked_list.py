@@ -105,7 +105,7 @@ class LinkedList(LinkedBase):
         return None
 
     def clone(self) -> LinkedList:
-        pass
+        return copy(self)
 
     @overload
     def append(self, data: T) -> None:

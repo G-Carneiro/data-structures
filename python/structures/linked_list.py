@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from copy import copy
-from typing import overload
+from typing import overload, final
 
 from .Node import LinkedNode as LN, T
 from .linked_base import LinkedBase
@@ -43,6 +43,7 @@ class LinkedList(LinkedBase):
     def insert(self, data: T, index: int | LN) -> None:
         ...
 
+    @final
     def insert_sorted(self, data: T) -> None:
         previous: LN = self.head
         key = self.size
@@ -57,6 +58,7 @@ class LinkedList(LinkedBase):
             self.insert(data=data, previous=previous)
         return None
 
+    @final
     def at(self, index: int) -> T:
         return self[index].data
 
@@ -77,10 +79,12 @@ class LinkedList(LinkedBase):
     def pop_front(self) -> T:
         return super()._pop_front()
 
+    @final
     def remove(self, data: T) -> None:
         self.pop(index=self.find(data=data))
         return None
 
+    @final
     def contains(self, data: T) -> bool:
         try:
             self.find(data=data)
@@ -89,6 +93,7 @@ class LinkedList(LinkedBase):
 
         return True
 
+    @final
     def find(self, data: T) -> int:
         for i, node in enumerate(self):
             if (node.data == data):
@@ -96,6 +101,7 @@ class LinkedList(LinkedBase):
 
         raise ValueError
 
+    @final
     def invert(self) -> None:
         if (self.size < 2):
             return None
@@ -104,6 +110,7 @@ class LinkedList(LinkedBase):
 
         return None
 
+    @final
     def clone(self) -> LinkedList:
         return copy(self)
 
@@ -121,13 +128,16 @@ class LinkedList(LinkedBase):
     def append(self, data: T | LinkedList) -> None:
         pass
 
+    @final
     def _before_index(self, index: int) -> LN:
         return self[index - 1]
 
+    @final
     def __add__(self, other: T | LinkedList) -> None:
         self.append(data=other)
         return None
 
+    @final
     def __getitem__(self, key: int) -> LN:
         self._check_empty()
         if (key < 0):
@@ -141,6 +151,7 @@ class LinkedList(LinkedBase):
 
         return item
 
+    @final
     def __reversed__(self) -> LinkedList:
         new: LinkedList = copy(self)
         new.invert()

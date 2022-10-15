@@ -5,7 +5,7 @@ from typing import Optional, overload
 from .Node import LinkedNode as LN, T
 
 
-class LinkedStack:
+class LinkedBase:
     def __init__(self) -> None:
         self._head: Optional[LN] = None
         self._size: int = 0
@@ -21,21 +21,21 @@ class LinkedStack:
     def empty(self) -> bool:
         return (self.size == 0)
 
-    def push(self, data: T) -> None:
-        new_node: LN = LN(data=data)
+    def _check_empty(self):
         if self.empty():
-            self._head = new_node
-        else:
-            new_node.next = self.head
-            self._head = new_node
+            raise Exception("Empty!")
+        return None
+
+    def _push_front(self, data: T) -> None:
+        new_node: LN = LN(data=data)
+        new_node.next = self.head
+        self._head = new_node
 
         self._size += 1
         return None
 
-    def pop(self) -> Optional[T]:
-        if self.empty():
-            return None
-
+    def _pop_front(self) -> T:
+        self._check_empty()
         removed: LN = self._head
         self._head = self.head.next
         self._size -= 1
@@ -44,13 +44,57 @@ class LinkedStack:
     def clear(self) -> None:
         pass
 
+    def __len__(self) -> int:
+        return self.size
 
-class LinkedList(LinkedStack):
+
+class LinkedQueue(LinkedBase):
+    def __init__(self):
+        super().__init__()
+        self._last: Optional[LN] = None
+
+    def push(self, data: T) -> None:
+        new_node: LN = LN(data=data)
+        if self.empty():
+            self._head = new_node
+        else:
+            self._last.next = new_node
+
+        self._last = new_node
+        self._size += 1
+        return None
+
+    def enqueue(self, data: T) -> None:
+        return self.push(data=data)
+
+    def pop(self) -> T:
+        data: T = super()._pop_front()
+        if self.empty():
+            self._last = None
+        return data
+
+    def dequeue(self) -> T:
+        return self.pop()
+
+
+class LinkedStack(LinkedBase):
+    def __init__(self):
+        super().__init__()
+
+    def push(self, data: T) -> None:
+        super()._push_front(data=data)
+        return None
+
+    def pop(self) -> T:
+        return super()._pop_front()
+
+
+class LinkedList(LinkedBase):
     def __init__(self):
         super().__init__()
 
     def push_front(self, data: T) -> None:
-        super().push(data=data)
+        super()._push_front(data=data)
         return None
 
     def push_back(self, data: T) -> None:
@@ -62,7 +106,7 @@ class LinkedList(LinkedStack):
     @overload
     def insert(self, data: T, index: int) -> None:
         if (index == 0):
-            self.push_front(data=data)
+            self._push_front(data=data)
         else:
             previous: LN = self._before_index(index=index)
             self.insert(data=data, previous=previous)
@@ -84,17 +128,24 @@ class LinkedList(LinkedStack):
     def insert_sorted(self, data: T) -> None:
         pass
 
-    def at(self, index: int) -> Optional[T]:
-        pass
+    def at(self, index: int) -> T:
+        return self[index].data
 
-    def pop(self, index: int) -> Optional[T]:
-        pass
+    def pop(self, index: int) -> T:
+        previous: LN = self._before_index(index=index)
+        head: LN = self.head
+        removed: LN = previous.next
+        self._head = removed
+        super()._pop_front()
+        previous.next = self.head
+        self._head = head
+        return removed.data
 
-    def pop_back(self) -> Optional[T]:
-        pass
+    def pop_back(self) -> T:
+        return self.pop(index=self.size - 1)
 
-    def pop_front(self) -> Optional[T]:
-        pass
+    def pop_front(self) -> T:
+        return super()._pop_front()
 
     def remove(self, data: T) -> None:
         pass
@@ -102,7 +153,7 @@ class LinkedList(LinkedStack):
     def contains(self, data: T) -> bool:
         return (self.find(data=data) is not None)
 
-    def find(self, data: T) -> Optional[int]:
+    def find(self, data: T) -> int:
         actual_node: LN = self._head
         for i in range(self.size):
             if (actual_node.data == data):
@@ -110,7 +161,7 @@ class LinkedList(LinkedStack):
 
             actual_node = actual_node.next
 
-        return None
+        raise ValueError
 
     def invert(self) -> None:
         if (self.size < 2):
@@ -122,7 +173,7 @@ class LinkedList(LinkedStack):
 
     def clone(self) -> LinkedList:
         pass
-    
+
     @overload
     def append(self, data: T) -> None:
         pass
@@ -145,13 +196,21 @@ class LinkedList(LinkedStack):
         pass
 
     def _before_index(self, index: int) -> LN:
-        it: LN = self.head
-        if (index > self.size):
-            index = self.size
+        return self[index - 1]
 
-        for _ in range(index - 1):
-            it = it.next
-        return it
+    def __add__(self, other: T | LN | LinkedList) -> None:
+        self.append(data=other)
+        return None
 
-    def _last_node(self) -> LN:
-        return self._before_index(index=self.size)
+    def __getitem__(self, key: int) -> LN:
+        self._check_empty()
+        if (key < 0):
+            key = key % self.size
+        elif (key >= self.size):
+            raise IndexError
+
+        item: LN = self.head
+        for _ in range(key):
+            item = item.next
+
+        return item

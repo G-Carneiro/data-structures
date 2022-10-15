@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import copy
 from typing import overload
 
 from .Node import LinkedNode as LN, T
@@ -145,3 +146,8 @@ class LinkedList(LinkedBase):
             item = item.next
 
         return item
+
+    def __reversed__(self) -> LinkedList:
+        new: LinkedList = copy(self)
+        new.invert()
+        return new

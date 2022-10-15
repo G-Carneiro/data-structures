@@ -108,15 +108,18 @@ class LinkedList(LinkedBase):
 
     @overload
     def append(self, data: T) -> None:
-        pass
+        self.push_back(data=data)
+        return None
 
     @overload
     def append(self, node: LN) -> None:
-        pass
+        self[-1].next = node
+        return None
 
     @overload
     def append(self, linked_list: LinkedList) -> None:
-        pass
+        self.append(node=linked_list.head)
+        return None
 
     def append(self, data: T | LN | LinkedList) -> None:
         pass

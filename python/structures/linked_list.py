@@ -118,19 +118,13 @@ class LinkedList(LinkedBase):
         self._size += linked_list.size
         return None
 
-    def append(self, data: T | LN | LinkedList) -> None:
-        pass
-
-    def halve(self):
-        pass
-
-    def slice(self, start: int, stop: int, step: int = 1) -> None:
+    def append(self, data: T | LinkedList) -> None:
         pass
 
     def _before_index(self, index: int) -> LN:
         return self[index - 1]
 
-    def __add__(self, other: T | LN | LinkedList) -> None:
+    def __add__(self, other: T | LinkedList) -> None:
         self.append(data=other)
         return None
 

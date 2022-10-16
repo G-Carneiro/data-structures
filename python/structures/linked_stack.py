@@ -1,7 +1,5 @@
-from __future__ import annotations
-
-from .Node import T
 from .linked_base import LinkedBase
+from .Node import T
 
 
 class LinkedStack(LinkedBase):

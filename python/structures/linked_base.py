@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import final, Optional
 
 from .Node import LinkedNode as LN, T
 
@@ -8,17 +8,21 @@ class LinkedBase:
         self._head: Optional[LN] = None
         self._size: int = 0
 
+    @final
     @property
     def head(self) -> Optional[LN]:
         return self._head
 
+    @final
     @property
     def size(self) -> int:
         return self._size
 
+    @final
     def empty(self) -> bool:
         return (self.size == 0)
 
+    @final
     def _check_empty(self):
         if self.empty():
             raise Exception("Empty!")
@@ -39,10 +43,12 @@ class LinkedBase:
         self._size -= 1
         return removed.data
 
+    @final
     def clear(self) -> None:
         while (not self.empty()):
             self._pop_front()
         return None
 
+    @final
     def __len__(self) -> int:
         return self.size

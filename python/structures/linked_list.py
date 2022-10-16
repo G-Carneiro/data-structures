@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from copy import copy
-from typing import overload, final
+from typing import final, overload
 
-from .Node import LinkedNode as LN, T
 from .linked_base import LinkedBase
+from .Node import LinkedNode as LN, T
 
 
 class LinkedList(LinkedBase):

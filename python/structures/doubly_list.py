@@ -1,9 +1,8 @@
+from .linked_list import LinkedList
 from .Node import DoublyLinkedNode as DLN, T
 
-from .linked_list import LinkedList
 
-
-class DoublyLinkedList(LinkedList):
+class DoublyLinkedList(LinkedList[T]):
     def __init__(self):
         super().__init__()
 

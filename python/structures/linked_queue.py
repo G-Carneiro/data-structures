@@ -1,10 +1,10 @@
 from typing import Optional
 
-from .Node import LinkedNode as LN, T
 from .linked_base import LinkedBase
+from .Node import LinkedNode as LN, T
 
 
-class LinkedQueue(LinkedBase):
+class LinkedQueue(LinkedBase[T]):
     def __init__(self):
         super().__init__()
         self._last: Optional[LN] = None

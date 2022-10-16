@@ -2,7 +2,7 @@ from .linked_base import LinkedBase
 from .Node import T
 
 
-class LinkedStack(LinkedBase):
+class LinkedStack(LinkedBase[T]):
     def __init__(self):
         super().__init__()
 

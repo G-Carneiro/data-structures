@@ -7,7 +7,7 @@ from .linked_base import LinkedBase
 from .Node import LinkedNode as LN, T
 
 
-class LinkedList(LinkedBase):
+class LinkedList(LinkedBase[T]):
     def __init__(self):
         super().__init__()
 

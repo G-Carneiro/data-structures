@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Generic, Optional, TypeVar
 
-T = int
+T = TypeVar("T")
 
 
-class Node:
+class Node(Generic[T]):
     def __init__(self, data: T) -> None:
         self._data: T = data
 
@@ -14,7 +14,7 @@ class Node:
         return self._data
 
 
-class LinkedNode(Node):
+class LinkedNode(Node[T]):
     def __init__(self, data: T) -> None:
         super().__init__(data)
         self._next: Optional[LinkedNode] = None
@@ -28,7 +28,7 @@ class LinkedNode(Node):
         self._next = node
 
 
-class DoublyLinkedNode(Node):
+class DoublyLinkedNode(Node[T]):
     def __init__(self, data: T) -> None:
         super().__init__(data)
         self._next: Optional[DoublyLinkedNode] = None
@@ -51,7 +51,7 @@ class DoublyLinkedNode(Node):
         self._previous = node
 
 
-class BinaryTreeNode(Node):
+class BinaryTreeNode(Node[T]):
     def __init__(self, data: T) -> None:
         super().__init__(data)
         self._left: Optional[BinaryTreeNode] = None

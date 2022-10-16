@@ -1,9 +1,9 @@
-from typing import final, Optional
+from typing import final, Generic, Optional
 
 from .Node import LinkedNode as LN, T
 
 
-class LinkedBase:
+class LinkedBase(Generic[T]):
     def __init__(self) -> None:
         self._head: Optional[LN] = None
         self._size: int = 0

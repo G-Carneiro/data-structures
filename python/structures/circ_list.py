@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from .Node import LinkedNode as LN, T
 from .linked_list import LinkedList
+from .Node import LinkedNode as LN, T
 
 
-class CircularList(LinkedList):
+class CircularList(LinkedList[T]):
     def __init__(self):
         super().__init__()
 
